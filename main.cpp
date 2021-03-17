@@ -11,39 +11,57 @@ class strec{
     public:
         vector<string> stdfn;
         vector<string> stdln;
-        vector<int> stdph;
+        vector<string> stdph;
         void insst(){
-            string a,b;
-            int c;
+            string a,b,c;
+            int i=0;
             cin >>a >>b >>c;
+            if(a.length()>25||b.length()>30||c.length()>15||!isNum(c)){
+                cout<< "input error"<< endl;
+                return;
+            }
+             while(i<stdfn.size()){
+                if(stdfn[i]==a){
+                    cout<< "input error"<< endl;
+                    return;
+                    }
+                ++i;
+            }
             stdfn.push_back(a);
             stdln.push_back(b);
             stdph.push_back(c);
         };
+        bool isNum(string x){
+            for(int i=0;i<x.length();i++){
+                if(x.at(i)<48 && x.at(i)>57)return false;
+            }
+            return true;
+        }
         void delst(){
             int i = 0;
-            string a,b;
-            int c;
+            string a,b,c;
             cin >>a >>b >>c;
             while(i<stdfn.size()){
-                if(stdfn[i]!=a) break;
-                stdfn.erase(i);
-                stdln.erase(i);
-                stdph.erase(i);
+                if(stdfn[i]==a){
+                    stdfn.erase(stdfn.begin()+i);
+                    stdln.erase(stdln.begin()+i);
+                    stdph.erase(stdph.begin()+i);
+                }
                 ++i;
             }
         };
         void schst(){
-            string a,b;
-            int c;
+            string a,b,c;
             int i = 0;
             cin >>a >>b >>c;
             while(i<stdfn.size()){
-                if(stdfn[i]!=a) break;
-                cout<< i<< endl;
+                if(stdfn[i]==a){
+                    cout<< i<< endl;
+                    return;
+                    }
                 ++i;
             }
-
+            cout<< "search error"<< endl;
         };
         void print(int i){
             cout<< stdfn[i]<< " "<< stdln[i]<< " "<< stdph[i]<< endl;
@@ -57,7 +75,6 @@ int main(){
     string inp,sch;
     strec asr;
     while(true){
-        cout << "well function";
         int i = 0;
         cin >>inp;
         if(inp == "insert"){
